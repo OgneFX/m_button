@@ -13,7 +13,7 @@ type userDataPayload = {
 const registerUserRequest = async (
   userData: userDataPayload
 ): Promise<ApiResponse> => {
-  const res = await fetch("https://my-backend-cwvb.onrender.com/api/user", {
+  const res = await fetch("https://my-button-back.onrender.com/api/user", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(userData),

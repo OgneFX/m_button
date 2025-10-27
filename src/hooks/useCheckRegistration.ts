@@ -12,7 +12,7 @@ export const useCheckRegistration = () => {
     }
 
     const response = await fetch(
-      `https://my-backend-cwvb.onrender.com/api/user/check?userId=${userId}`
+      `https://my-button-back.onrender.com/api/user/check?userId=${userId}`
     );
 
     const data = await response.json();
