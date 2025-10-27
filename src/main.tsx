@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { postEvent } from "@telegram-apps/sdk";
 import { isMobile } from "react-device-detect";
-import "./slyles/global.scss";
+import "./styles/global.scss";
 import { App } from "./App";
 import { BrowserRouter } from "react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
