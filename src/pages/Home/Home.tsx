@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import styles from "./Home.module.scss";
-import RedCartoonButton from "../../Components/Buttons/RedCartoonButton/RedCartoonButton";
+// import RedCartoonButton from "../../Components/Buttons/RedCartoonButton/RedCartoonButton";
 import { BigButton } from "../../Components/Buttons/RebButton/BigButton";
 
 export const Home: React.FC = () => {
