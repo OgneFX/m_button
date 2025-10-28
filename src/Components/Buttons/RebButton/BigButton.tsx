@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./BigButton.module.scss";
+import "./BigButton.scss";
 
 export const BigButton: React.FC = () => {
   const [pressed, setPressed] = useState(false);
