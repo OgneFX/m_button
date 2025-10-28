@@ -13,17 +13,24 @@ export const DesktopSlider: React.FC<SliderProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-  const scrollTimeout = useRef<number | null>(null);
+  const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleWheel = (e: WheelEvent) => {
     if (scrollTimeout.current) return;
 
-    if (e.deltaY > 0 && currentIndex < slides.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    } else if (e.deltaY < 0 && currentIndex > 0) {
-      setCurrentIndex((prev) => prev - 1);
-    }
-    setRegionIndex(currentIndex);
+    setCurrentIndex((prev) => {
+      let newIndex = prev;
+
+      if (e.deltaY > 0 && prev < slides.length - 1) {
+        newIndex = prev + 1;
+      } else if (e.deltaY < 0 && prev > 0) {
+        newIndex = prev - 1;
+      }
+
+      setRegionIndex(newIndex);
+
+      return newIndex;
+    });
 
     scrollTimeout.current = setTimeout(() => {
       scrollTimeout.current = null;
@@ -31,19 +38,19 @@ export const DesktopSlider: React.FC<SliderProps> = ({
   };
 
   useEffect(() => {
-    setRegionIndex(currentIndex);
-  }, [currentIndex, setRegionIndex]);
-
-  useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
-
-    container.addEventListener("wheel", handleWheel);
+    const listener = (e: WheelEvent) => handleWheel(e);
+    container.addEventListener("wheel", listener, { passive: false });
 
     return () => {
-      container.removeEventListener("wheel", handleWheel);
+      container.removeEventListener("wheel", listener);
     };
-  }, []);
+  }, [slides.length]);
+
+  if (!slides || slides.length === 0) {
+    return <div className={styles.sliderContainer}>Нет данных</div>;
+  }
 
   return (
     <div className={styles.sliderContainer} ref={containerRef}>
