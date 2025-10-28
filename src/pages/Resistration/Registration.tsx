@@ -5,7 +5,7 @@ import { mapImages } from "../../Data/SliderRegistratiom";
 import { useTelegramAuth } from "../../hooks/useTelegramAuth";
 import React, { useState } from "react";
 import type { LaunchParams } from "@telegram-apps/sdk-react";
-import styles from "./registration.module.scss";
+import styles from "./Registration.module.scss";
 
 interface RegistrationProps {
   userObj: LaunchParams;

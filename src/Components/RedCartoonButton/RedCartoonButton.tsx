@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import "./RedCartoonButton.scss";
+import "./redCartoonButton.module.scss";
 
 type Props = {
   size?: number; // базовый размер в px (width/height)
