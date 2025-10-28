@@ -1,0 +1,81 @@
+.button-wrapper {
+  perspective: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.button-base {
+  position: relative;
+  width: 180px;
+  height: 100px;
+  background: #1a1a1a;
+  border-radius: 20px;
+  box-shadow: 0 10px 0 #0e0e0e, 0 20px 20px rgba(0, 0, 0, 0.4);
+  transform-style: preserve-3d;
+}
+
+.button-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  margin: auto;
+  width: 160px;
+  height: 80px;
+  background: linear-gradient(180deg, #ff5c5c 0%, #d60000 100%);
+  border-radius: 15px;
+  box-shadow: inset 0 4px 6px rgba(255, 255, 255, 0.3),
+    0 8px 0 #b00000, 0 15px 20px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: "Comic Sans MS", cursive;
+  font-size: 24px;
+  text-shadow: 0 2px 0 #700000;
+  transition: all 0.15s ease-in-out;
+  transform: translateZ(20px);
+  cursor: pointer;
+}
+
+.button-wrapper.pressed .button-top {
+  transform: translateY(8px) translateZ(10px);
+  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.5),
+    0 2px 0 #b00000, 0 5px 10px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(180deg, #d60000 0%, #8b0000 100%);
+}
+
+.button-wires {
+  position: absolute;
+  bottom: -20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.wire {
+  width: 6px;
+  height: 30px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #ff0000 0%, #660000 100%);
+  animation: wirePulse 2s infinite ease-in-out;
+}
+
+.wire-left {
+  margin-left: 25px;
+}
+.wire-right {
+  margin-right: 25px;
+}
+
+@keyframes wirePulse {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+  }
+}

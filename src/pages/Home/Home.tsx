@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import styles from "./Home.module.scss";
-import RedCartoonButton from "../../Components/RedCartoonButton/RedCartoonButton";
+import RedCartoonButton from "../../Components/Buttons/RedCartoonButton/RedCartoonButton";
+import { BigButton } from "../../Components/Buttons/RebButton/BigButton";
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -19,11 +20,7 @@ export const Home: React.FC = () => {
         background: "#0f0f10",
       }}
     >
-      <RedCartoonButton
-        size={260}
-        label='Щёлк!'
-        onClick={() => console.log("Clicked!")}
-      />
+      <BigButton />
       <button className={styles.button} onClick={handleGoToQuestions}>
         Перейти к вопросам
       </button>
