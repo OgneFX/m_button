@@ -68,8 +68,8 @@ export const MoblieSlider: React.FC<SliderProps> = ({
                   : styles.hidden
               }`}
             >
-              <img src={slide.image} alt={slide.title || ""} />
-              {slide.title && <span>{slide.title}</span>}
+              <img src={slide.image} alt={slide.name || ""} />
+              {slide.name && <span>{slide.name}</span>}
             </div>
           );
         })}

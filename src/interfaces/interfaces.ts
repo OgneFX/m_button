@@ -1,7 +1,7 @@
 export interface Slide {
   id: number;
   image: string;
-  title?: string;
+  name?: string;
 }
 
 export interface Region {
