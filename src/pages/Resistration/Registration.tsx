@@ -1,11 +1,11 @@
 import { MoblieSlider } from "../../Components/Sliders/MobileSlider/MobileSlider";
 import { DesktopSlider } from "../../Components/Sliders/DesktopSlider/DesktopSlider";
 import { isMobile, isDesktop } from "react-device-detect";
-import { mapImages } from "../../Data/SliderRegistratiom";
 import { useTelegramAuth } from "../../hooks/useTelegramAuth";
 import React, { useState } from "react";
 import type { LaunchParams } from "@telegram-apps/sdk-react";
 import styles from "./Registration.module.scss";
+import { useRegions } from "../../hooks/useRegions";
 
 interface RegistrationProps {
   userObj: LaunchParams;
@@ -17,13 +17,14 @@ export const Registration: React.FC<RegistrationProps> = ({
   onSuccess,
 }) => {
   const [regionIndex, setRegionIndex] = useState(0);
-
   const { mutate, isPending } = useTelegramAuth();
+  const { data: regions, isLoading, isError } = useRegions();
 
   const handleRegistrationClick = async () => {
+    if (!regions) return;
     const payload = {
       ...userObj,
-      regionIndex: mapImages[regionIndex].id,
+      regionId: regions[regionIndex]?.id,
     };
 
     mutate(payload, {
@@ -41,15 +42,14 @@ export const Registration: React.FC<RegistrationProps> = ({
     });
   };
 
+  if (isLoading) return <p>Загрузка регионов...</p>;
+  if (isError || !regions?.length) return <p>Ошибка загрузки регионов</p>;
+
   const checkDevice = () => {
     if (isMobile) {
-      return (
-        <MoblieSlider slides={mapImages} setRegionIndex={setRegionIndex} />
-      );
+      return <MoblieSlider slides={regions} setRegionIndex={setRegionIndex} />;
     } else if (isDesktop) {
-      return (
-        <DesktopSlider slides={mapImages} setRegionIndex={setRegionIndex} />
-      );
+      return <DesktopSlider slides={regions} setRegionIndex={setRegionIndex} />;
     }
   };
 

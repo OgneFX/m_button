@@ -4,22 +4,8 @@ export interface Slide {
   title?: string;
 }
 
-export interface IQuestion {
+export interface Region {
   id: number;
-  title: string;
-  question: string;
-  multiSelect: boolean;
-  category: string;
-  imageUrl?: string;
-  isRecurring: boolean;
-  activeUntil: Date;
-  createdAt: Date;
-  author: { username: string };
-
-  options: QuestionOptions[];
-}
-
-interface QuestionOptions {
-  id: number;
-  text: string;
+  name: string;
+  image: string;
 }

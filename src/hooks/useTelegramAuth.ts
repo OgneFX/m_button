@@ -7,7 +7,7 @@ interface ApiResponse {
 }
 
 type userDataPayload = {
-  regionIndex: number;
+  regionId: number;
 } & LaunchParams;
 
 const registerUserRequest = async (
