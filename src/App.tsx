@@ -5,8 +5,6 @@ import { Navigate, Route, Routes } from "react-router";
 import { useCheckRegistration } from "./hooks/useCheckRegistration";
 import { PrivateRoute } from "./routers/PrivateRoute";
 
-//chacnge
-
 export const App: React.FC = () => {
   const { isRegistered, isLoading, isError, refetch, userObj } =
     useCheckRegistration();
@@ -35,7 +33,7 @@ export const App: React.FC = () => {
 
       {/* Private routes: все вложенные маршруты будут доступны только если PrivateRoute разрешит */}
       <Route element={<PrivateRoute isRegistered={isRegistered} />}>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Home userObj={userObj} />} />
         <Route path='/settings' element={<Settings />} />
       </Route>
 
