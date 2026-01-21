@@ -2,25 +2,40 @@ import { useQuery } from "@tanstack/react-query";
 import { useLaunchParams } from "@telegram-apps/sdk-react";
 import { useCallback } from "react";
 
+interface CheckRegistrationResponse {
+  isRegistered: boolean;
+  user?: {
+    streakDays: number;
+    regionId: number;
+  };
+  hasClickedToday?: boolean;
+  serverTime?: string;
+}
+
 export const useCheckRegistration = () => {
   const userObj = useLaunchParams();
   const userId = userObj?.tgWebAppData?.user?.id;
 
-  const checkRegistration = useCallback(async (): Promise<boolean> => {
-    if (!userId) {
-      throw new Error("User ID is nit avalible");
-    }
+  const checkRegistration =
+    useCallback(async (): Promise<CheckRegistrationResponse> => {
+      if (!userId) {
+        throw new Error("User ID is not avalible");
+      }
 
-    const response = await fetch(
-      `https://my-button-back.onrender.com/api/user/check?userId=${userId}`
-    );
+      const response = await fetch(
+        `https://my-button-back.onrender.com/api/user/check?userId=${userId}`,
+      );
 
-    const data = await response.json();
-    return data.isRegistered === true;
-  }, [userId]);
+      if (!response.ok) {
+        throw new Error("Failed to check registration");
+      }
+
+      const data = await response.json();
+      return data;
+    }, [userId]);
 
   const {
-    data: isRegistered,
+    data: responseData,
     isLoading,
     isError,
     refetch,
@@ -32,7 +47,10 @@ export const useCheckRegistration = () => {
   });
 
   return {
-    isRegistered: isRegistered ?? false,
+    isRegistered: responseData?.isRegistered ?? false,
+    userData: responseData?.user,
+    hasClickedToday: responseData?.hasClickedToday ?? false,
+    serverTime: responseData?.serverTime,
     isLoading,
     isError,
     refetch,
