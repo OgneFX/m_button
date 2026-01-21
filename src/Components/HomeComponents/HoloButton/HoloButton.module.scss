@@ -1,0 +1,127 @@
+.holoButton {
+  position: relative;
+  width: 240px;
+  height: 56px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 28px;
+  border-radius: 14px;
+  background: rgba(10, 20, 25, 0.35);
+  color: #9ffcff;
+  font-family: "Orbitron", sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.6s ease,
+    filter 0.6s ease;
+  box-shadow:
+    0 0 8px rgba(0, 255, 255, 0.25),
+    inset 0 0 12px rgba(0, 255, 255, 0.15);
+  animation: subtlePulse 4s ease-in-out infinite;
+  cursor: pointer;
+  overflow: visible;
+  
+  &:hover {
+    color: #d7ffff;
+    transform: scale(1.04);
+    box-shadow:
+      0 0 24px rgba(0, 255, 255, 0.55),
+      0 0 48px rgba(0, 255, 255, 0.35),
+      inset 0 0 22px rgba(0, 255, 255, 0.25);
+    filter: drop-shadow(0 0 24px rgba(0, 255, 255, 0.25));
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.text {
+  position: relative;
+  z-index: 2;
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(0, 255, 255, 0.2) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.active .glow {
+  opacity: 1;
+}
+
+.ports {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.port {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: cyan;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(0, 255, 255, 0.7);
+}
+
+/* размещаем порты по краям */
+.port:nth-child(1) {
+  top: 100%;
+  left: 17%;
+  transform: translateY(-50%);
+}
+
+.port:nth-child(2) {
+  top: 93%;
+  left: 39%;
+}
+
+.port:nth-child(3) {
+  top: 93%;
+  right: 25%;
+}
+
+.port:nth-child(4) {
+  top: 55%;
+  right: -2%;
+  transform: translateY(-50%);
+}
+
+
+/* Особая анимация доната */
+.donate.active {
+  animation: donatePulse 1.2s ease-out;
+}
+
+@keyframes subtlePulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(0,255,255,0.15), inset 0 0 8px rgba(0,255,255,0.1); }
+  50% { box-shadow: 0 0 14px rgba(0,255,255,0.25), inset 0 0 14px rgba(0,255,255,0.15); }
+}
+
+@keyframes donatePulse {
+  0% {
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+  }
+  40% {
+    box-shadow: 0 0 60px rgba(0, 255, 150, 0.8);
+    transform: scale(1.08);
+  }
+  100% {
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
+    transform: scale(1);
+  }
+}
