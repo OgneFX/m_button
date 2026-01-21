@@ -1,5 +1,4 @@
 import React from "react";
-// import { useNavigate } from "react-router";
 import styles from "./Home.module.scss";
 import type { LaunchParams } from "@telegram-apps/sdk-react";
 import { useClickButton } from "../../hooks/useClick";
@@ -13,7 +12,6 @@ interface HomeProps {
 }
 
 export const Home: React.FC<HomeProps> = ({ userObj }) => {
-  // const navigate = useNavigate();
   const withDonateAnimation = true;
   const { mutate } = useClickButton();
 
@@ -22,10 +20,6 @@ export const Home: React.FC<HomeProps> = ({ userObj }) => {
     if (telegramId === undefined) return;
     mutate({ telegramId });
   };
-
-  // const handleGoToQuestions = () => {
-  //   navigate("/questions");
-  // };
 
   return (
     <div className={styles.mainPanel}>
@@ -40,13 +34,8 @@ export const Home: React.FC<HomeProps> = ({ userObj }) => {
         withDonateAnimation={withDonateAnimation}
         onClick={handleClick}
       />
-
+      {/* кнопка доната */}
       <HoloRoundButton icon={<StarButton />} />
-
-      {/* <div onClick={handleClick}></div>
-      <button className={styles.button} onClick={handleGoToQuestions}>
-        Перейти к вопросам
-      </button> */}
     </div>
   );
 };
