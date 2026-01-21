@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./HoloDonateButton.module.scss";
-import StarIcon from "../../../assets/telegram-star.svg?react";
+import StarIcon from "../../../../../../../Assets/telegram-star.svg?react";
 
 interface HoloDonateButtonProps {
   amount: number;
