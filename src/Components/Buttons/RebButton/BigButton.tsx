@@ -16,10 +16,6 @@ export const BigButton: React.FC = () => {
         >
           <span className='button-label'>PRESS</span>
         </div>
-        <div className='button-wires'>
-          <div className='wire wire-left'></div>
-          <div className='wire wire-right'></div>
-        </div>
       </div>
     </div>
   );

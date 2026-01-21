@@ -48,34 +48,4 @@
   background: linear-gradient(180deg, #d60000 0%, #8b0000 100%);
 }
 
-.button-wires {
-  position: absolute;
-  bottom: -20px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
 
-.wire {
-  width: 6px;
-  height: 30px;
-  border-radius: 3px;
-  background: linear-gradient(180deg, #ff0000 0%, #660000 100%);
-  animation: wirePulse 2s infinite ease-in-out;
-}
-
-.wire-left {
-  margin-left: 25px;
-}
-.wire-right {
-  margin-right: 25px;
-}
-
-@keyframes wirePulse {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
-  }
-}

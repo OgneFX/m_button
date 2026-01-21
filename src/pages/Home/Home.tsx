@@ -1,18 +1,20 @@
 import React from "react";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 import styles from "./Home.module.scss";
-// import RedCartoonButton from "../../Components/Buttons/RedCartoonButton/RedCartoonButton";
-import { BigButton } from "../../Components/Buttons/RebButton/BigButton";
 import type { LaunchParams } from "@telegram-apps/sdk-react";
 import { useClickButton } from "../../hooks/useClick";
+import { CountdownTimer } from "../../Components/HomeComponents/CountdownTimer/CountdownTimer";
+import { HoloButton } from "../../Components/HomeComponents/HoloButton/HoloButton";
+import { HoloRoundButton } from "../../Components/HomeComponents/HoloRoundButton/HoloRoundButton";
+import { StarButton } from "../../Components/HomeComponents/TelegramStar/TelegramStar";
 
 interface HomeProps {
   userObj: LaunchParams;
 }
 
 export const Home: React.FC<HomeProps> = ({ userObj }) => {
-  const navigate = useNavigate();
-
+  // const navigate = useNavigate();
+  const withDonateAnimation = true;
   const { mutate } = useClickButton();
 
   const handleClick = () => {
@@ -21,25 +23,30 @@ export const Home: React.FC<HomeProps> = ({ userObj }) => {
     mutate({ telegramId });
   };
 
-  const handleGoToQuestions = () => {
-    navigate("/questions");
-  };
+  // const handleGoToQuestions = () => {
+  //   navigate("/questions");
+  // };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "grid",
-        placeItems: "center",
-        background: "#0f0f10",
-      }}
-    >
-      <div onClick={handleClick}>
-        <BigButton />
+    <div className={styles.mainPanel}>
+      {/* таймер */}
+      <div className='timer-wrapper'>
+        <CountdownTimer initialTime='05:30' />
       </div>
+
+      {/* кнопка */}
+      <HoloButton
+        text='Жмакай'
+        withDonateAnimation={withDonateAnimation}
+        onClick={handleClick}
+      />
+
+      <HoloRoundButton icon={<StarButton />} />
+
+      {/* <div onClick={handleClick}></div>
       <button className={styles.button} onClick={handleGoToQuestions}>
         Перейти к вопросам
-      </button>
+      </button> */}
     </div>
   );
 };

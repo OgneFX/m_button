@@ -1,0 +1,36 @@
+.holoDonateButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  height: 20px;
+  width: 96px;
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  color: #9ef;
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 1px;
+  border-radius: 14px;
+  padding: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 8px #00eaff;
+
+  &:hover {
+    background: rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    color: #fff;
+  }
+}
+
+.btnGroup {
+  display: flex;
+  align-items: center;
+
+}
+
+.starIcon {
+  width: 24px;
+  height: 24px;
+  filter: drop-shadow(0 0 6px rgba(0, 255, 255, 0.7));
+}

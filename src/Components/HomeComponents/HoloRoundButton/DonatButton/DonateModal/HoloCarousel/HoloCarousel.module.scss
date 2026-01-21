@@ -1,0 +1,111 @@
+.carousel {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  overflow: hidden;
+  color: #bff;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.levelTitle {
+  font-family: "Orbitron", sans-serif;
+  color: #7efaff;
+  text-shadow: 0 0 10px #00eaff;
+  font-size: 1.2rem;
+  margin: 0px;
+}
+
+.slideWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  min-height: 120px;
+  transition: all 0.5s ease;
+}
+
+.navArrows {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.arrowBtn {
+  pointer-events: auto;
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  color: #8ff;
+  font-size: 1rem;
+  border-radius: 20%;
+  width: 10px;
+  height: 30px;
+  cursor: pointer;
+
+  transition: 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrowBtn:hover {
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+  color: #fff;
+}
+
+.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.customInputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: #9ff;
+}
+
+.starIcon {
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0 0 6px rgba(0, 255, 255, 0.7));
+}
+
+.customInput {
+  background: rgba(0, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  color: #bff;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  width: 120px;
+  text-align: center;
+  font-family: "Orbitron", sans-serif;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.customInput:focus {
+  outline: none;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+  background: rgba(0, 255, 255, 0.1);
+}
+
+.hint {
+  font-size: 1.2rem;
+  color: #8ff;
+  text-shadow: 0 0 6px #00ffff;
+}
+
+.starGropt {
+  display: flex;
+  align-items: center;
+}
