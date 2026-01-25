@@ -9,7 +9,10 @@ interface CheckRegistrationResponse {
     regionId: number;
   };
   hasClickedToday?: boolean;
-  serverTime?: string;
+  timer?: {
+    serverTime: string;
+    nextClickAvailableAt: string;
+  };
 }
 
 export const useCheckRegistration = () => {
@@ -50,7 +53,7 @@ export const useCheckRegistration = () => {
     isRegistered: responseData?.isRegistered ?? false,
     userData: responseData?.user,
     hasClickedToday: responseData?.hasClickedToday ?? false,
-    serverTime: responseData?.serverTime,
+    timer: responseData?.timer,
     isLoading,
     isError,
     refetch,

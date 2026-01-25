@@ -14,7 +14,7 @@ export const App: React.FC = () => {
     userObj,
     userData,
     hasClickedToday,
-    serverTime,
+    timer,
   } = useCheckRegistration();
   if (isLoading) {
     return <div>Загрузка...</div>;
@@ -48,7 +48,7 @@ export const App: React.FC = () => {
               userObj={userObj}
               userData={userData}
               hasClickedToday={hasClickedToday}
-              serverTime={serverTime}
+              timer={timer}
             />
           }
         />

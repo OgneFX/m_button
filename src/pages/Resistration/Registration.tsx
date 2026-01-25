@@ -12,11 +12,25 @@ interface RegistrationProps {
   onSuccess: () => void;
 }
 
+const timezones = [
+  "Europe/Moscow",
+  "Europe/Kaliningrad",
+  "Asia/Yekaterinburg",
+  "Asia/Novosibirsk",
+  "Asia/Krasnoyarsk",
+  "Asia/Irkutsk",
+  "Asia/Yakutsk",
+  "Asia/Vladivostok",
+  "Asia/Magadan",
+  "Asia/Kamchatka",
+];
+
 export const Registration: React.FC<RegistrationProps> = ({
   userObj,
   onSuccess,
 }) => {
   const [regionIndex, setRegionIndex] = useState(0);
+  const [timezone, setTimezone] = useState(timezones[0]);
   const { mutate, isPending } = useTelegramAuth();
   const { data: regions, isLoading, isError } = useRegions();
 
@@ -25,6 +39,7 @@ export const Registration: React.FC<RegistrationProps> = ({
     const payload = {
       ...userObj,
       regionId: regions[regionIndex]?.id,
+      timezone,
     };
 
     mutate(payload, {
@@ -59,6 +74,21 @@ export const Registration: React.FC<RegistrationProps> = ({
         {" "}
         {`Добро пожаловать в Society Mind Research`}
       </h1>
+
+      <div className={styles.registration__timezone}>
+        <label htmlFor='timezone-select'>Выберите часовой пояс:</label>
+        <select
+          id='timezone-select'
+          value={timezone}
+          onChange={(e) => setTimezone(e.target.value)}
+        >
+          {timezones.map((tz) => (
+            <option key={tz} value={tz}>
+              {tz}
+            </option>
+          ))}
+        </select>
+      </div>
 
       {checkDevice()}
       <button

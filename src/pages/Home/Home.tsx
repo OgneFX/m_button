@@ -14,13 +14,16 @@ interface HomeProps {
     regionId: number;
   };
   hasClickedToday?: boolean;
-  serverTime?: string;
+  timer?: {
+    serverTime: string;
+    nextClickAvailableAt: string;
+  };
 }
 
 export const Home: React.FC<HomeProps> = ({
   userObj,
   hasClickedToday = false,
-  serverTime,
+  timer,
 }) => {
   const withDonateAnimation = true;
   const { mutate } = useClickButton();
@@ -43,7 +46,13 @@ export const Home: React.FC<HomeProps> = ({
     <div className={styles.mainPanel}>
       {/* таймер */}
       <div className='timer-wrapper'>
-        <CountdownTimer initialTime={serverTime} isReady={hasClicked} />
+        {timer && (
+          <CountdownTimer
+            serverNow={timer.serverTime}
+            endsAt={timer.nextClickAvailableAt}
+            isReady={hasClicked}
+          />
+        )}
       </div>
 
       {/* кнопка */}
