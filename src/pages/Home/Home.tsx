@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import styles from "./Home.module.scss";
 import type { LaunchParams } from "@telegram-apps/sdk-react";
-import { useClickButton } from "../../hooks/useClick";
+import { useClickButton } from "../../hooks/client-server/useClick";
 import { CountdownTimer } from "../../Components/HomeComponents/CountdownTimer/CountdownTimer";
 import { HoloButton } from "../../Components/HomeComponents/HoloButton/HoloButton";
 import { HoloRoundButton } from "../../Components/HomeComponents/HoloRoundButton/HoloRoundButton";
 import { StarButton } from "../../Components/HomeComponents/TelegramStar/TelegramStar";
+import { useTimeZoneLabel } from "../../hooks/utils/useTimeZoneLable";
 
 interface HomeProps {
   userObj: LaunchParams;
   userData?: {
+    timezone: string;
     streakDays: number;
     regionId: number;
   };
@@ -21,11 +23,11 @@ interface HomeProps {
 }
 
 export const Home: React.FC<HomeProps> = ({
+  userData,
   userObj,
   hasClickedToday = false,
   timer,
 }) => {
-  console.log("Мы в Home", timer);
   const withDonateAnimation = true;
   const { mutate } = useClickButton();
 
@@ -43,6 +45,8 @@ export const Home: React.FC<HomeProps> = ({
     );
   };
 
+  const timeZoneLabel = useTimeZoneLabel(userData?.timezone);
+
   return (
     <div className={styles.mainPanel}>
       {/* таймер */}
@@ -52,6 +56,7 @@ export const Home: React.FC<HomeProps> = ({
             serverNow={timer.serverTime}
             endsAt={timer.nextClickAvailableAt}
             isReady={hasClicked}
+            timeZoneLabel={timeZoneLabel}
           />
         )}
       </div>

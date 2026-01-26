@@ -2,7 +2,7 @@ import { Registration } from "./pages/Resistration/Registration";
 import { Settings } from "./pages/Settings/Settings";
 import { Home } from "./pages/Home/Home";
 import { Navigate, Route, Routes } from "react-router";
-import { useCheckRegistration } from "./hooks/useCheckRegistration";
+import { useCheckRegistration } from "./hooks/client-server/useCheckRegistration";
 import { PrivateRoute } from "./routers/PrivateRoute";
 
 export const App: React.FC = () => {

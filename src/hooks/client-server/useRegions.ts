@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { localImages } from "../Data/SliderRegistratiom";
-import type { Region } from "../interfaces/interfaces";
+import { localImages } from "../../Data/SliderRegistratiom";
+import type { Region } from "../../interfaces/interfaces";
 
 interface RegionsResponse {
   success: boolean;

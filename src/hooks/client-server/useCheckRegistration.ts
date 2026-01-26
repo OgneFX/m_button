@@ -5,6 +5,7 @@ import { useCallback } from "react";
 interface CheckRegistrationResponse {
   isRegistered: boolean;
   user?: {
+    timezone: string;
     streakDays: number;
     regionId: number;
   };

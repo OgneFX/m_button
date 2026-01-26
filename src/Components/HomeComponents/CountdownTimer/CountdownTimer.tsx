@@ -14,10 +14,10 @@ export const CountdownTimer: React.FC<CountdownTimerProps> = ({
   endsAt,
   isReady = false,
   className = "",
-  timeZoneLabel = "MSK",
+  timeZoneLabel = "UNK",
 }) => {
   const [timeLeft, setTimeLeft] = useState(0);
-  console.log("Мы в таймере", serverNow, endsAt);
+
   // 1️⃣ смещение серверного времени
   const serverOffset = useMemo(() => {
     return new Date(serverNow).getTime() - Date.now();

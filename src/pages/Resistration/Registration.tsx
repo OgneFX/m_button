@@ -1,11 +1,11 @@
 import { MoblieSlider } from "../../Components/Sliders/MobileSlider/MobileSlider";
 import { DesktopSlider } from "../../Components/Sliders/DesktopSlider/DesktopSlider";
 import { isMobile, isDesktop } from "react-device-detect";
-import { useTelegramAuth } from "../../hooks/useTelegramAuth";
+import { useTelegramAuth } from "../../hooks/client-server/useTelegramAuth";
 import React, { useState } from "react";
 import type { LaunchParams } from "@telegram-apps/sdk-react";
 import styles from "./Registration.module.scss";
-import { useRegions } from "../../hooks/useRegions";
+import { useRegions } from "../../hooks/client-server/useRegions";
 
 interface RegistrationProps {
   userObj: LaunchParams;
