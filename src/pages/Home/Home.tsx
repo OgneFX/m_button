@@ -25,6 +25,7 @@ export const Home: React.FC<HomeProps> = ({
   hasClickedToday = false,
   timer,
 }) => {
+  console.log("Мы в Home", timer);
   const withDonateAnimation = true;
   const { mutate } = useClickButton();
 
