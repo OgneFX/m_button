@@ -35,7 +35,6 @@ export const CountdownTimer: React.FC<CountdownTimerProps> = ({
 
   // 3️⃣ таймер
   useEffect(() => {
-    if (timeLeft <= 0) return;
     const update = () => {
       const now = Date.now() + serverOffset;
       const diff = new Date(endsAt).getTime() - now;
@@ -47,7 +46,7 @@ export const CountdownTimer: React.FC<CountdownTimerProps> = ({
     const interval = setInterval(update, 1000);
 
     return () => clearInterval(interval);
-  }, [endsAt, serverOffset, timeLeft]);
+  }, [endsAt, serverOffset]);
 
   // 4️⃣ форматирование
   const { formattedTime, isLastHour } = useMemo(() => {
