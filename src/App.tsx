@@ -4,6 +4,7 @@ import { Home } from "./pages/Home/Home";
 import { Navigate, Route, Routes } from "react-router";
 import { useCheckRegistration } from "./hooks/client-server/useCheckRegistration";
 import { PrivateRoute } from "./routers/PrivateRoute";
+import { PrivateLayout } from "./routers/PrivateLayout";
 
 export const App: React.FC = () => {
   const {
@@ -41,18 +42,20 @@ export const App: React.FC = () => {
 
       {/* Private routes: все вложенные маршруты будут доступны только если PrivateRoute разрешит */}
       <Route element={<PrivateRoute isRegistered={isRegistered} />}>
-        <Route
-          path='/'
-          element={
-            <Home
-              userObj={userObj}
-              userData={userData}
-              hasClickedToday={hasClickedToday}
-              timer={timer}
-            />
-          }
-        />
-        <Route path='/settings' element={<Settings />} />
+        <Route element={<PrivateLayout />}>
+          <Route
+            path='/'
+            element={
+              <Home
+                userObj={userObj}
+                userData={userData}
+                hasClickedToday={hasClickedToday}
+                timer={timer}
+              />
+            }
+          />
+          <Route path='/settings' element={<Settings />} />
+        </Route>
       </Route>
 
       {/* Fallback: на любой неизвестный путь — отправляем в зависимости от статуса */}

@@ -29,7 +29,6 @@ export const CountdownTimer: React.FC<CountdownTimerProps> = ({
     return date.toLocaleDateString("ru-RU", {
       day: "2-digit",
       month: "2-digit",
-      year: "numeric",
     });
   }, [serverNow]);
 
@@ -49,31 +48,21 @@ export const CountdownTimer: React.FC<CountdownTimerProps> = ({
   }, [endsAt, serverOffset]);
 
   // 4️⃣ форматирование
-  const { formattedTime, isLastHour } = useMemo(() => {
+  const formattedTime = useMemo(() => {
     const totalSeconds = Math.floor(timeLeft / 1000);
 
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = totalSeconds % 60;
 
-    if (hours === 0) {
-      return {
-        formattedTime: `${String(minutes).padStart(2, "0")}:${String(
-          seconds,
-        ).padStart(2, "0")}`,
-        isLastHour: true,
-      };
-    }
-
-    return {
-      formattedTime: `${String(hours).padStart(2, "0")}:${String(
-        minutes,
-      ).padStart(2, "0")}`,
-      isLastHour: false,
-    };
+    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
+      2,
+      "0",
+    )}:${String(seconds).padStart(2, "0")}`;
   }, [timeLeft]);
 
-  // 5️⃣ классы (ВОТ ТУТ БЫЛА ОШИБКА)
+  const isLastHour = timeLeft <= 60 * 60 * 1000;
+
   const timerClasses = `${styles.countdownTimer} ${className} ${
     isLastHour ? styles.lastHour : ""
   }`;
@@ -94,9 +83,7 @@ export const CountdownTimer: React.FC<CountdownTimerProps> = ({
           ))}
         </div>
 
-        <div className={styles.timeFormat}>
-          {isLastHour ? "MM:SS" : "HH:MM"}
-        </div>
+        <div className={styles.timeFormat}>"HH:MM:SS"</div>
       </div>
 
       <div

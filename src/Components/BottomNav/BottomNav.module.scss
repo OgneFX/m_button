@@ -1,0 +1,110 @@
+.bottomNav {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+
+  display: flex;
+  gap: 12px;
+
+  padding: 10px 14px;
+
+  background: rgba(10, 20, 25, 0.45);
+  backdrop-filter: blur(12px);
+
+  border-radius: 20px;
+  border: 1px solid rgba(0, 255, 255, 0.25);
+
+  box-shadow:
+    inset 0 0 20px rgba(0, 255, 255, 0.12),
+    0 0 30px rgba(0, 255, 255, 0.25);
+
+  user-select: none;
+}
+
+.navButton  {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 64px;
+  height: 56px;
+
+  border-radius: 14px;
+  background: rgba(0, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.15);
+
+  color: rgba(160, 255, 255, 0.7);
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.5px;
+
+  cursor: pointer;
+  overflow: hidden;
+
+  transition:
+    transform 0.2s ease,
+    color 0.25s ease,
+    box-shadow 0.4s ease;
+
+  /* TAP — основной UX */
+  &:active {
+    transform: scale(0.94);
+  }
+
+  /* hover ТОЛЬКО для non-touch */
+  @media (hover: hover) {
+    &:hover {
+      color: #d7ffff;
+      box-shadow:
+        0 0 18px rgba(0, 255, 255, 0.5),
+        inset 0 0 18px rgba(0, 255, 255, 0.25);
+
+      .glow {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.icon {
+  font-size: 20px;
+  margin-bottom: 4px;
+  z-index: 2;
+}
+
+.label {
+  z-index: 2;
+  pointer-events: none;
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(0, 255, 255, 0.25) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* ACTIVE STATE */
+.active {
+  color: #9ffcff;
+
+  border-color: rgba(0, 255, 255, 0.5);
+
+  box-shadow:
+    0 0 25px rgba(0, 255, 255, 0.6),
+    inset 0 0 20px rgba(0, 255, 255, 0.3);
+
+  .glow {
+    opacity: 1;
+  }
+}
