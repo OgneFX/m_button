@@ -30,8 +30,10 @@ export const Home: React.FC<HomeProps> = ({
 }) => {
   const withDonateAnimation = true;
   const { mutate } = useClickButton();
-
+  console.log("Мы на странице", hasClickedToday);
   const [hasClicked, setHasClicked] = useState(hasClickedToday);
+
+  const timeZoneLabel = useTimeZoneLabel(userData?.timezone);
   const handleClick = () => {
     const telegramId = userObj.tgWebAppData?.user?.id;
     if (telegramId === undefined) return;
@@ -44,8 +46,6 @@ export const Home: React.FC<HomeProps> = ({
       },
     );
   };
-
-  const timeZoneLabel = useTimeZoneLabel(userData?.timezone);
 
   return (
     <div className={styles.mainPanel}>
