@@ -4,14 +4,14 @@ import styles from "./mobileSlider.module.scss";
 
 interface SliderProps {
   slides: Slide[];
-  setCountryIndex: (index: number) => void;
+  setSelectedCountryId: (id: number) => void;
 }
 
 export const MoblieSlider: React.FC<SliderProps> = ({
   slides,
-  setCountryIndex,
+  setSelectedCountryId,
 }) => {
-  const [currentIndex, setCurrentIndex] = useState(1);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
@@ -29,10 +29,17 @@ export const MoblieSlider: React.FC<SliderProps> = ({
     const diff = touchStartX.current - touchEndX.current;
 
     if (Math.abs(diff) > 50) {
+      let newIndex = currentIndex;
       if (diff > 0 && currentIndex < slides.length - 1) {
-        setCurrentIndex((prev) => prev + 1);
+        newIndex = currentIndex + 1;
       } else if (diff < 0 && currentIndex > 0) {
-        setCurrentIndex((prev) => prev - 1);
+        newIndex = currentIndex - 1;
+      }
+
+      setCurrentIndex(newIndex);
+      const selectedSlide = slides[newIndex];
+      if (selectedSlide) {
+        setSelectedCountryId(selectedSlide.id);
       }
     }
 
@@ -41,8 +48,10 @@ export const MoblieSlider: React.FC<SliderProps> = ({
   };
 
   useEffect(() => {
-    setCountryIndex(currentIndex);
-  }, [currentIndex, setCountryIndex]);
+    if (slides.length > 0) {
+      setSelectedCountryId(slides[0].id);
+    }
+  }, [slides]);
 
   return (
     <div
