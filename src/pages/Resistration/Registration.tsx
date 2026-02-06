@@ -107,7 +107,7 @@ export const Registration: React.FC<RegistrationProps> = ({
       <div className={styles.registration__country}>
         <label htmlFor='country-search'>Выберите страну:</label>
 
-        <div className={styles.searchWrapper}>
+        <div className={styles.searchWrapperCountry}>
           <input
             type='text'
             id='country-search'
