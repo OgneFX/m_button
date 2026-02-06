@@ -11,7 +11,7 @@ export const MoblieSlider: React.FC<SliderProps> = ({
   slides,
   setCountryIndex,
 }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(1);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 

@@ -11,7 +11,7 @@ export const DesktopSlider: React.FC<SliderProps> = ({
   slides,
   setCountryIndex,
 }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(1);
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
