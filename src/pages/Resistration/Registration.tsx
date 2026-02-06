@@ -25,7 +25,7 @@ export const Registration: React.FC<RegistrationProps> = ({
   const { data, isLoading, isError } = useRegions();
   console.log("Данные", data);
 
-  const { countries, allRegions: regions, timezones: timezone } = data || {};
+  const { countries, allRegions: regions, timezone } = data || {};
 
   const filteredRegions =
     regions?.filter((region) => region.countryId === selectedCountryId) || [];

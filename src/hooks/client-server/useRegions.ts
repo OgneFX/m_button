@@ -6,7 +6,7 @@ interface RegionsResponse {
   success: boolean;
   data: {
     countries: Country[];
-    timezones: Timezone[];
+    timezone: Timezone[];
   };
 }
 
@@ -30,7 +30,7 @@ interface Region {
 
 const fetchRegions = async (): Promise<{
   countries: CountriesForRegistration[];
-  timezones: Timezone[];
+  timezone: Timezone[];
   allRegions: Region[];
 }> => {
   const res = await fetch("https://my-button-back.onrender.com/api/regions");
@@ -38,7 +38,7 @@ const fetchRegions = async (): Promise<{
 
   const json: RegionsResponse = await res.json();
   if (!json.success) throw new Error("Ошибка загрузки данных");
-  console.log("Данные в хуке", json);
+
   const allCountries: CountriesForRegistration[] = json.data.countries.map(
     (country) => ({
       id: country.id,
@@ -54,9 +54,10 @@ const fetchRegions = async (): Promise<{
       ...region,
     })),
   );
+  console.log("Данные в хуке", json);
   return {
     countries: allCountries,
-    timezones: json.data.timezones,
+    timezone: json.data.timezone,
     allRegions,
   };
 };
@@ -64,7 +65,7 @@ const fetchRegions = async (): Promise<{
 export const useRegions = () => {
   return useQuery<{
     countries: CountriesForRegistration[];
-    timezones: Timezone[];
+    timezone: Timezone[];
     allRegions: Region[];
   }>({
     queryKey: ["regions"],
