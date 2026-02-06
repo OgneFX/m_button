@@ -153,7 +153,7 @@ export const DesktopSlider: React.FC<SliderProps> = ({
           const isActive = index === currentIndex;
           const isPrev = index === currentIndex - 1;
           const isNext = index === currentIndex + 1;
-
+          const isFarAway = Math.abs(index - currentIndex) > 1;
           // Добавляем инерцию в трансформацию
           const translateX = (index - currentIndex) * 180 + velocity * 2;
 
@@ -176,6 +176,7 @@ export const DesktopSlider: React.FC<SliderProps> = ({
                   velocity === 0
                     ? "transform 0.3s ease, opacity 0.3s ease"
                     : "transform 0.1s linear, opacity 0.1s linear",
+                display: isFarAway ? "none" : "flex",
               }}
             >
               <img src={slide.image} alt={slide.name || ""} />
