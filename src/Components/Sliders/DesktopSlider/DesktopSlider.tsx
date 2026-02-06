@@ -16,6 +16,7 @@ export const DesktopSlider: React.FC<SliderProps> = ({
   const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleWheel = (e: WheelEvent) => {
+    e.preventDefault();
     if (scrollTimeout.current) return;
 
     setCurrentIndex((prev) => {
