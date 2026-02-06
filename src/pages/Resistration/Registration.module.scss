@@ -5,12 +5,11 @@
   justify-content: flex-start;
   width: 100%;
   min-height: 100vh;
-  padding: 2rem 1rem;
+  padding: 4rem 1rem 2rem; // Увеличил верхний отступ
   background: linear-gradient(135deg, #0a0f1c 0%, #1a1f2e 100%);
   position: relative;
   overflow-x: hidden;
 
-  // Анимированный фон
   &::before {
     content: "";
     position: absolute;
@@ -46,21 +45,7 @@
     animation: textGlow 3s ease-in-out infinite alternate;
     position: relative;
     padding-bottom: 0.5rem;
-
-    &::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 25%;
-      right: 25%;
-      height: 2px;
-      background: linear-gradient(90deg, 
-        transparent, 
-        rgba(0, 255, 255, 0.8), 
-        transparent
-      );
-      animation: scanLine 3s linear infinite;
-    }
+    text-align: center; // Добавил центрирование текста
   }
 
   &__region {
@@ -110,6 +95,7 @@
       margin-bottom: 0.8rem;
       text-transform: uppercase;
       text-shadow: 0 0 8px rgba(159, 252, 255, 0.4);
+      text-align: center; // Добавил центрирование
     }
 
     .searchWrapper {
@@ -142,9 +128,11 @@
       box-shadow: 
         inset 0 0 10px rgba(0, 255, 255, 0.1),
         0 0 0 rgba(0, 255, 255, 0);
+      text-align: center; // Добавил центрирование текста в инпуте
 
       &::placeholder {
         color: rgba(127, 250, 255, 0.4);
+        text-align: center; // Центрируем placeholder
       }
 
       &:focus {
@@ -153,6 +141,7 @@
           inset 0 0 15px rgba(0, 255, 255, 0.2),
           0 0 20px rgba(0, 255, 255, 0.25);
         background: rgba(0, 15, 25, 0.8);
+        text-align: left; // При фокусе возвращаем обычное выравнивание
       }
 
       &:hover {
@@ -175,6 +164,7 @@
       box-shadow: 
         inset 0 0 10px rgba(0, 255, 255, 0.1),
         0 0 0 rgba(0, 255, 255, 0);
+      text-align: center; // Центрируем текст в селекте
 
       option {
         background: rgba(0, 15, 25, 0.95);
@@ -183,6 +173,7 @@
         font-family: "Orbitron", sans-serif;
         font-size: 0.95rem;
         border: none;
+        text-align: center; // Центрируем опции
         
         &:hover {
           background: rgba(0, 255, 255, 0.2);
@@ -200,6 +191,7 @@
           inset 0 0 15px rgba(0, 255, 255, 0.2),
           0 0 20px rgba(0, 255, 255, 0.25);
         background: rgba(0, 15, 25, 0.8);
+        text-align: left; // При фокусе возвращаем обычное выравнивание
       }
 
       &:hover {
@@ -243,6 +235,7 @@
       margin-bottom: 0.8rem;
       text-transform: uppercase;
       text-shadow: 0 0 8px rgba(159, 252, 255, 0.4);
+      text-align: center; // Добавил центрирование
     }
 
     select {
@@ -261,6 +254,7 @@
       box-shadow: 
         inset 0 0 10px rgba(0, 255, 255, 0.1),
         0 0 0 rgba(0, 255, 255, 0);
+      text-align: center; // Центрируем текст в селекте
 
       option {
         background: rgba(0, 15, 25, 0.95);
@@ -269,6 +263,7 @@
         font-family: "Orbitron", sans-serif;
         font-size: 0.95rem;
         border: none;
+        text-align: center; // Центрируем опции
         
         &:hover {
           background: rgba(0, 255, 255, 0.2);
@@ -286,6 +281,7 @@
           inset 0 0 15px rgba(0, 255, 255, 0.2),
           0 0 20px rgba(0, 255, 255, 0.25);
         background: rgba(0, 15, 25, 0.8);
+        text-align: left; // При фокусе возвращаем обычное выравнивание
       }
 
       &:hover {
@@ -402,14 +398,15 @@
   }
 }
 
-@keyframes scanLine {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
+// Убрал анимацию scanLine:
+// @keyframes scanLine {
+//   0% {
+//     transform: translateX(-100%);
+//   }
+//   100% {
+//     transform: translateX(100%);
+//   }
+// }
 
 @keyframes shine {
   0% {
@@ -434,6 +431,12 @@
 }
 
 // Адаптивность
+@media (min-width: 415px) {
+  .registration {
+    padding-top: 3rem; // Для десктопа уменьшаем отступ
+  }
+}
+
 @media (min-width: 768px) {
   .registration {
     padding: 3rem 2rem;
