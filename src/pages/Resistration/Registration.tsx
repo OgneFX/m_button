@@ -71,7 +71,7 @@ export const Registration: React.FC<RegistrationProps> = ({
       return (
         <DesktopSlider
           slides={countries}
-          setCountryIndex={setSelectedCountryId}
+          setSelectedCountryId={setSelectedCountryId}
         />
       );
     }

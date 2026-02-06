@@ -4,14 +4,14 @@ import styles from "./desktopSlider.module.scss";
 
 interface SliderProps {
   slides: Slide[];
-  setCountryIndex: (index: number) => void;
+  setSelectedCountryId: (id: number) => void;
 }
 
 export const DesktopSlider: React.FC<SliderProps> = ({
   slides,
-  setCountryIndex,
+  setSelectedCountryId,
 }) => {
-  const [currentIndex, setCurrentIndex] = useState(1);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -27,7 +27,10 @@ export const DesktopSlider: React.FC<SliderProps> = ({
         newIndex = prev - 1;
       }
 
-      setCountryIndex(newIndex);
+      const selectedSlide = slides[newIndex];
+      if (selectedSlide) {
+        setSelectedCountryId(selectedSlide.id);
+      }
 
       return newIndex;
     });
@@ -42,6 +45,10 @@ export const DesktopSlider: React.FC<SliderProps> = ({
     if (!container) return;
     const listener = (e: WheelEvent) => handleWheel(e);
     container.addEventListener("wheel", listener, { passive: false });
+
+    if (slides.length > 0) {
+      setSelectedCountryId(slides[0].id);
+    }
 
     return () => {
       container.removeEventListener("wheel", listener);
