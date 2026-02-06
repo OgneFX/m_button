@@ -22,7 +22,6 @@ const getGMTOffset = (iana: string): string => {
 
     const tz = parts.find((p) => p.type === "timeZoneName")?.value;
 
-    // ru-RU может вернуть "GMT+3" или "UTC+3"
     return tz?.replace("UTC", "GMT") ?? "";
   } catch {
     return "";

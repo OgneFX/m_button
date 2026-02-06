@@ -4,7 +4,7 @@ export interface Slide {
   name?: string;
 }
 
-export interface Region {
+export interface CountriesForRegistration {
   id: number;
   name: string;
   image: string;

@@ -4,12 +4,12 @@ import styles from "./mobileSlider.module.scss";
 
 interface SliderProps {
   slides: Slide[];
-  setRegionIndex: (index: number) => void;
+  setCountryIndex: (index: number) => void;
 }
 
 export const MoblieSlider: React.FC<SliderProps> = ({
   slides,
-  setRegionIndex,
+  setCountryIndex,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const touchStartX = useRef<number | null>(null);
@@ -41,8 +41,8 @@ export const MoblieSlider: React.FC<SliderProps> = ({
   };
 
   useEffect(() => {
-    setRegionIndex(currentIndex);
-  }, [currentIndex, setRegionIndex]);
+    setCountryIndex(currentIndex);
+  }, [currentIndex, setCountryIndex]);
 
   return (
     <div
@@ -64,8 +64,8 @@ export const MoblieSlider: React.FC<SliderProps> = ({
                 isActive
                   ? styles.active
                   : isPrev || isNext
-                  ? styles.side
-                  : styles.hidden
+                    ? styles.side
+                    : styles.hidden
               }`}
             >
               <img src={slide.image} alt={slide.name || ""} />

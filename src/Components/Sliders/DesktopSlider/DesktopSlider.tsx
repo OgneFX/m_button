@@ -4,12 +4,12 @@ import styles from "./desktopSlider.module.scss";
 
 interface SliderProps {
   slides: Slide[];
-  setRegionIndex: (index: number) => void;
+  setCountryIndex: (index: number) => void;
 }
 
 export const DesktopSlider: React.FC<SliderProps> = ({
   slides,
-  setRegionIndex,
+  setCountryIndex,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -27,7 +27,7 @@ export const DesktopSlider: React.FC<SliderProps> = ({
         newIndex = prev - 1;
       }
 
-      setRegionIndex(newIndex);
+      setCountryIndex(newIndex);
 
       return newIndex;
     });
@@ -67,8 +67,8 @@ export const DesktopSlider: React.FC<SliderProps> = ({
                 isActive
                   ? styles.active
                   : isPrev || isNext
-                  ? styles.side
-                  : styles.hidden
+                    ? styles.side
+                    : styles.hidden
               }`}
             >
               <img src={slide.image} alt={slide.name || ""} />

@@ -12,34 +12,31 @@ interface RegistrationProps {
   onSuccess: () => void;
 }
 
-const timezones = [
-  "Europe/Moscow",
-  "Europe/Kaliningrad",
-  "Asia/Yekaterinburg",
-  "Asia/Novosibirsk",
-  "Asia/Krasnoyarsk",
-  "Asia/Irkutsk",
-  "Asia/Yakutsk",
-  "Asia/Vladivostok",
-  "Asia/Magadan",
-  "Asia/Kamchatka",
-];
-
 export const Registration: React.FC<RegistrationProps> = ({
   userObj,
   onSuccess,
 }) => {
-  const [regionIndex, setRegionIndex] = useState(0);
-  const [timezone, setTimezone] = useState(timezones[0]);
+  const [selectedCountryId, setSelectedCountryId] = useState<number>(0);
+  const [selectedRegionId, setSelectedRegionId] = useState<number>(0);
+  const [selectedTimezone, setSelectedTimezone] =
+    useState<string>("Europe/Moscow");
+
   const { mutate, isPending } = useTelegramAuth();
-  const { data: regions, isLoading, isError } = useRegions();
+  const { data, isLoading, isError } = useRegions();
+
+  const { countries, allRegions: regions, timezones: timezone } = data || {};
+
+  const filteredRegions =
+    regions?.filter((region) => region.countryId === selectedCountryId) || [];
+
+  const defaultTimezone = timezone?.[0]?.name || "";
 
   const handleRegistrationClick = async () => {
-    if (!regions) return;
+    if (!regions || !timezone) return;
     const payload = {
       ...userObj,
-      regionId: regions[regionIndex]?.id,
-      timezone,
+      regionId: selectedRegionId,
+      timezone: selectedTimezone,
     };
 
     mutate(payload, {
@@ -58,13 +55,24 @@ export const Registration: React.FC<RegistrationProps> = ({
   };
 
   if (isLoading) return <p>Загрузка регионов...</p>;
-  if (isError || !regions?.length) return <p>Ошибка загрузки регионов</p>;
+  if (isError || !regions?.length || !countries?.length || !timezone?.length)
+    return <p>Ошибка загрузки регионов</p>;
 
   const checkDevice = () => {
     if (isMobile) {
-      return <MoblieSlider slides={regions} setRegionIndex={setRegionIndex} />;
+      return (
+        <MoblieSlider
+          slides={countries}
+          setCountryIndex={setSelectedCountryId}
+        />
+      );
     } else if (isDesktop) {
-      return <DesktopSlider slides={regions} setRegionIndex={setRegionIndex} />;
+      return (
+        <DesktopSlider
+          slides={countries}
+          setCountryIndex={setSelectedCountryId}
+        />
+      );
     }
   };
 
@@ -79,16 +87,33 @@ export const Registration: React.FC<RegistrationProps> = ({
         <label htmlFor='timezone-select'>Выберите часовой пояс:</label>
         <select
           id='timezone-select'
-          value={timezone}
-          onChange={(e) => setTimezone(e.target.value)}
+          value={defaultTimezone}
+          onChange={(e) => setSelectedTimezone(e.target.value)}
         >
-          {timezones.map((tz) => (
-            <option key={tz} value={tz}>
-              {tz}
+          {timezone.map((tz) => (
+            <option key={tz.id} value={tz.name}>
+              {`${tz.name}/${tz.offset}`}
             </option>
           ))}
         </select>
       </div>
+
+      {selectedCountryId > 0 && filteredRegions.length > 0 && (
+        <div className={styles.registration__region}>
+          <label htmlFor='region-select'>Выберите регион:</label>
+          <select
+            id='region-select'
+            value={selectedRegionId}
+            onChange={(e) => setSelectedRegionId(Number(e.target.value))}
+          >
+            {filteredRegions.map((region) => (
+              <option key={region.id} value={region.id}>
+                {region.name}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
 
       {checkDevice()}
       <button
