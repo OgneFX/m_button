@@ -136,39 +136,37 @@ export const Registration: React.FC<RegistrationProps> = ({
         </select>
       </div>
 
-      {selectedCountryId > 0 && (
-        <div className={styles.registration__region}>
-          <label htmlFor='region-search'>Выберите регион:</label>
+      <div className={styles.registration__region}>
+        <label htmlFor='region-search'>Выберите регион:</label>
 
-          <div className={styles.searchWrapper}>
-            <input
-              type='text'
-              id='region-search'
-              placeholder='Поиск региона...'
-              value={regionSearch}
-              onChange={(e) => setRegionSearch(e.target.value)}
-              className={styles.searchInput}
-            />
-          </div>
-
-          <select
-            value={selectedRegionId}
-            onChange={(e) => setSelectedRegionId(Number(e.target.value))}
-            className={styles.regionSelect}
-            size={5} // Показываем несколько вариантов
-          >
-            {filteredRegions.length > 0 ? (
-              filteredRegions.map((region) => (
-                <option key={region.id} value={region.id}>
-                  {region.name}
-                </option>
-              ))
-            ) : (
-              <option disabled>Регионы не найдены</option>
-            )}
-          </select>
+        <div className={styles.searchWrapper}>
+          <input
+            type='text'
+            id='region-search'
+            placeholder='Поиск региона...'
+            value={regionSearch}
+            onChange={(e) => setRegionSearch(e.target.value)}
+            className={styles.searchInput}
+          />
         </div>
-      )}
+
+        <select
+          value={selectedRegionId}
+          onChange={(e) => setSelectedRegionId(Number(e.target.value))}
+          className={styles.regionSelect}
+          size={5} // Показываем несколько вариантов
+        >
+          {filteredRegions.length > 0 ? (
+            filteredRegions.map((region) => (
+              <option key={region.id} value={region.id}>
+                {region.name}
+              </option>
+            ))
+          ) : (
+            <option disabled>Регионы не найдены</option>
+          )}
+        </select>
+      </div>
 
       <div className={styles.registration__timezone}>
         <label htmlFor='timezone-select'>Выберите часовой пояс:</label>
