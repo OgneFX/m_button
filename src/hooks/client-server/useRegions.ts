@@ -38,7 +38,7 @@ const fetchRegions = async (): Promise<{
 
   const json: RegionsResponse = await res.json();
   if (!json.success) throw new Error("Ошибка загрузки данных");
-
+  console.log("Данные в хуке", json);
   const allCountries: CountriesForRegistration[] = json.data.countries.map(
     (country) => ({
       id: country.id,

@@ -23,6 +23,7 @@ export const Registration: React.FC<RegistrationProps> = ({
 
   const { mutate, isPending } = useTelegramAuth();
   const { data, isLoading, isError } = useRegions();
+  console.log("Данные", data);
 
   const { countries, allRegions: regions, timezones: timezone } = data || {};
 
