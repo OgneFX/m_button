@@ -1,6 +1,6 @@
-import { MoblieSlider } from "../../Components/Sliders/MobileSlider/MobileSlider";
-import { DesktopSlider } from "../../Components/Sliders/DesktopSlider/DesktopSlider";
-import { isMobile, isDesktop } from "react-device-detect";
+// import { MoblieSlider } from "../../Components/Sliders/MobileSlider/MobileSlider";
+// import { DesktopSlider } from "../../Components/Sliders/DesktopSlider/DesktopSlider";
+// import { isMobile, isDesktop } from "react-device-detect";
 import { useTelegramAuth } from "../../hooks/client-server/useTelegramAuth";
 import React, { useMemo, useState } from "react";
 import type { LaunchParams } from "@telegram-apps/sdk-react";
@@ -80,29 +80,61 @@ export const Registration: React.FC<RegistrationProps> = ({
   if (isError || !regions?.length || !countries?.length || !timezone?.length)
     return <p>Ошибка загрузки регионов</p>;
 
-  const checkDevice = () => {
-    if (isMobile) {
-      return (
-        <MoblieSlider
-          slides={countries}
-          setSelectedCountryId={setSelectedCountryId}
-        />
-      );
-    } else if (isDesktop) {
-      return (
-        <DesktopSlider
-          slides={countries}
-          setSelectedCountryId={setSelectedCountryId}
-        />
-      );
-    }
-  };
+  // const checkDevice = () => {
+  //   if (isMobile) {
+  //     return (
+  //       <MoblieSlider
+  //         slides={countries}
+  //         setSelectedCountryId={setSelectedCountryId}
+  //       />
+  //     );
+  //   } else if (isDesktop) {
+  //     return (
+  //       <DesktopSlider
+  //         slides={countries}
+  //         setSelectedCountryId={setSelectedCountryId}
+  //       />
+  //     );
+  //   }
+  // };
 
   return (
     <div className={styles.registration}>
       <h1 className={styles.registration__text}> {`Society Mind Research`}</h1>
 
-      {checkDevice()}
+      {/* {checkDevice()} */}
+
+      <div className={styles.registration__country}>
+        <label htmlFor='country-search'>Выберите страну:</label>
+
+        <div className={styles.searchWrapper}>
+          <input
+            type='text'
+            id='country-search'
+            placeholder='Поиск страны...'
+            value={regionSearch}
+            onChange={(e) => setRegionSearch(e.target.value)}
+            className={styles.searchInput}
+          />
+        </div>
+
+        <select
+          value={selectedCountryId}
+          onChange={(e) => setSelectedCountryId(Number(e.target.value))}
+          className={styles.countrySelect}
+          size={5}
+        >
+          {countries?.length > 0 ? (
+            countries.map((country) => (
+              <option key={country.id} value={country.id}>
+                {country.name}
+              </option>
+            ))
+          ) : (
+            <option disabled>Страны не найдены</option>
+          )}
+        </select>
+      </div>
 
       {selectedCountryId > 0 && (
         <div className={styles.registration__region}>
